@@ -13,9 +13,9 @@ namespace hafta1WebApi.Controllers
 
        [HttpGet]
 
-       public List<string> Get()
+       public ActionResult<List<string>> Get()
         {
-            return Status.getStatus();
+            return Ok(Status.getStatus());
         }
     }
 }

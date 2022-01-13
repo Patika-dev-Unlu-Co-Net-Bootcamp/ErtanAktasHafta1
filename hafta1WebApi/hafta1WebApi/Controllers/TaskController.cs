@@ -51,17 +51,21 @@ namespace hafta1WebApi.Controllers
        
 
         [HttpGet]
-        public List<Task> Get()
+        public ActionResult<List<Task>> Get()
         {
             var tasks = Tasks.OrderBy(t => t.Date).ToList();
-            return tasks;
+            return Ok(tasks);
 
         }
         [HttpGet("{status}")]
-        public Task GetById(string status)
+        public ActionResult<Task> GetByStatus(string status)
         {
             var task = Tasks.Where(x => x.Status == status).SingleOrDefault();
-            return task;
+            if (task == null)
+            {
+                return NoContent();
+            }
+            else { return Ok(task); }
         }
 
 
