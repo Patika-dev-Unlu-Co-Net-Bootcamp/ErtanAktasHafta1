@@ -48,25 +48,103 @@ namespace hafta1WebApi.Controllers
                 Date = new DateTime(2022,01,14)
              },
         };
-       
 
-        [HttpGet]
+
+        [HttpGet] // Tarihe göre Sıralama yaparak Getirir. Önce En yakın tarihli olan 
         public ActionResult<List<Task>> Get()
         {
             var tasks = Tasks.OrderBy(t => t.Date).ToList();
             return Ok(tasks);
 
         }
-        [HttpGet("{status}")]
-        public ActionResult<Task> GetByStatus(string status)
+        [HttpGet("{status}")] //Task Aktif ve ya Pasif olanları getirir;
+        public ActionResult<List<Task>> GetByStatus(string status)
         {
-            var task = Tasks.Where(x => x.Status == status).SingleOrDefault();
+            var task = Tasks.Where(x => x.Status == status).ToList();
             if (task == null)
             {
                 return NoContent();
             }
             else { return Ok(task); }
         }
+        [HttpGet("search")] //filtreleme 
+        public ActionResult<List<Task>> GetByFilter([FromQuery] string search)
+        {
+            var task = Tasks.Where(x => x.Title.ToLower().Contains(search.ToLower())).ToList();
+            if (task == null)
+            {
+                return NoContent();
+            }
+            else
+            {
+                return Ok(task);
+            }
+        }
+
+        [HttpPost] // Yeni task ekleme
+        public ActionResult NewTask([FromBody] Task task)
+        {
+            try
+            {
+                Tasks.Add(task);
+
+            }catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            
+            return StatusCode(201);
+        }
+
+        [HttpPut("{id}")] //Güncelleme
+
+        public ActionResult UpdateTask(int id, [FromForm] Task task)
+        {
+            var check = Tasks.Find(x => x.Id == id);
+            if (check == null) { return NoContent(); }
+            else {
+                check.Title = task.Title;
+                check.Description = task.Description;
+                check.Status = task.Status;
+                check.Date = task.Date;
+
+                return Ok(check); }
+        }
+
+        [HttpPatch("/TaskStatus/{id}")] 
+        public ActionResult StatusUpdate(int id, [FromForm] string status)
+        {
+            var check = Tasks.Find(x => x.Id == id);
+            if (check == null) { return NoContent(); }
+            else
+            {
+                
+                check.Status = status;
+                
+
+                return Ok(check);
+            }
+        }
+        [HttpDelete("{id}")] //Task Silme işlemi 
+
+        public ActionResult DeletTask(int id)
+        {
+            var check = Tasks.Find(x => x.Id == id);
+            if (check == null) { return NoContent(); }
+            else
+            {
+                Tasks.Remove(check);
+
+                return Ok();
+            }
+        }
+
+
+
+
+
+
 
 
 

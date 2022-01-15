@@ -26,3 +26,6 @@ C:\Projects\unluco\ErtanAktasHafta1\hafta1WebApi\hafta1WebApi\obj\Debug\net5.0\h
 C:\Projects\unluco\ErtanAktasHafta1\hafta1WebApi\hafta1WebApi\obj\Debug\net5.0\ref\hafta1WebApi.dll
 C:\Projects\unluco\ErtanAktasHafta1\hafta1WebApi\hafta1WebApi\obj\Debug\net5.0\hafta1WebApi.pdb
 C:\Projects\unluco\ErtanAktasHafta1\hafta1WebApi\hafta1WebApi\obj\Debug\net5.0\hafta1WebApi.genruntimeconfig.cache
+C:\Projects\unluco\ErtanAktasHafta1\hafta1WebApi\hafta1WebApi\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Projects\unluco\ErtanAktasHafta1\hafta1WebApi\hafta1WebApi\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Projects\unluco\ErtanAktasHafta1\hafta1WebApi\hafta1WebApi\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
